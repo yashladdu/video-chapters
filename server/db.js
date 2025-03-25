@@ -1,4 +1,5 @@
 import pg from "pg";
+import fs from "fs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -9,10 +10,25 @@ const db = new pg.Client({
     database: process.env.PG_DATABASE,
     password: process.env.PG_PASSWORD,
     port: process.env.PG_PORT,
+    ssl: {
+      rejectUnauthorized: true,
+      ca: fs.readFileSync("./ca.pem").toString(),
+    },
   });
 
-db.connect(() => {
-    console.log("connected to DB");
-});
+
+  db.connect(function (err) {
+      if (err)
+          throw err;
+          db.query("SELECT VERSION()", [], function (err, result) {
+          if (err)
+              throw err;
+  
+          console.log(result.rows[0].version);
+         
+      });
+  });
+
+
 
 export default db;

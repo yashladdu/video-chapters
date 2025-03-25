@@ -19,8 +19,9 @@ app.get("/api/random", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM videos");
     res.json(result.rows);
+    console.log(result.rows);
   } catch (error) {
-    
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
