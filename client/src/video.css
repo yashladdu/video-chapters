@@ -1,0 +1,22 @@
+.chapter-marker {
+    position: absolute;
+    width: 4px; /* Adjust width for visibility */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark gap */
+    top: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 9999; /* ✅ Ensure it appears above */
+  }
+  
+  .chapter-segment {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    pointer-events: none;
+    z-index: 9999; /* ✅ Ensure it appears above */
+  }
+  
+  .chapter-segment.active {
+    background-color: #ff0048; /* Green highlight for active chapter */
+  }
