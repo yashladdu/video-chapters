@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import axios from "axios";
-import Post from '../components/Card';
 
 function Home() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get("http://localhost:4000/api/random")
+      const res = await axios.get("https://video-chapters.onrender.com/api/random")
       setVideos(res.data);
     }
     fetchVideos();

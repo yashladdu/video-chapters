@@ -17,7 +17,7 @@ function Post(props) {
 
   useEffect(() => {
     const fetchChapter = async () => {
-      const res = await axios.get(`http://localhost:4000/api/chapters/${props.id}`);
+      const res = await axios.get(`https://video-chapters.onrender.com/api/chapters/${props.id}`);
       setChapters(res.data);
     }
     fetchChapter();

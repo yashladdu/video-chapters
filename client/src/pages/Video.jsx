@@ -12,12 +12,12 @@ function Video() {
 
     useEffect(() => {
         const fetchVideo = async () => {
-            const res = await axios.get(`http://localhost:4000/api/video/${id}`);
+            const res = await axios.get(`https://video-chapters.onrender.com/api/video/${id}`);
             setVideo(res.data);
         }
 
         const fetchChapters = async () => {
-            const res = await axios.get(`http://localhost:4000/api/chapters/${id}`);
+            const res = await axios.get(`https://video-chapters.onrender.com/api/chapters/${id}`);
             setChapters(res.data);
         }
         fetchVideo();

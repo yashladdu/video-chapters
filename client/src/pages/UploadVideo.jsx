@@ -50,7 +50,7 @@ const UploadVideo = () => {
       try {
         setUploading(prev => ({ ...prev, [resourceType]: true }));
         // Get Cloudinary upload signature
-        const signatureRes = await axios.get("http://localhost:4000/api/cloudinary-signature");
+        const signatureRes = await axios.get("https://video-chapters.onrender.com/api/cloudinary-signature");
         const {timestamp, signature, cloud_name, api_key} = signatureRes.data;
 
         // Prepare FormData for Cloudinary API
@@ -91,7 +91,7 @@ const UploadVideo = () => {
       }
 
       try {
-        const videoResponse = await axios.post("http://localhost:4000/api/video", {
+        const videoResponse = await axios.post("https://video-chapters.onrender.com/api/video", {
           title,
           description,
           videoUrl,
@@ -101,14 +101,14 @@ const UploadVideo = () => {
         const videoId = videoResponse.data.video.id;
   
         if (!autoGenerate) {
-          await axios.post("http://localhost:4000/api/chapters/add", {
+          await axios.post("https://video-chapters.onrender.com/api/chapters/add", {
             video_id: videoId,
             videoUrl,
             chapters: chapters.filter(ch => ch.start_time !== "" && ch.title !== ""),
           });
         } else {
           // Call backend to generate chapters automatically
-          await axios.post("http://localhost:4000/api/chapters/generate", { video_id: videoId });
+          await axios.post("https://video-chapters.onrender.com/api/chapters/generate", { video_id: videoId });
         }
         alert("✅ Video uploaded successfully!");
 
