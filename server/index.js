@@ -27,15 +27,15 @@ app.get("/api/random", async (req, res) => {
 
 app.post("/api/video", async (req, res) => {
     try {
-        const { title, description, videoUrl, thumbnailUrl } = req.body;
+        const { title, videoUrl, thumbnailUrl } = req.body;
    
         if (!videoUrl || !thumbnailUrl) {
             return res.status(400).json({ error: "Video or thumbnail URL is missing" });
           }
 
         const result = await db.query(
-            "INSERT INTO videos (title, description, video_url, thumbnail_url) VALUES ($1, $2, $3, $4) RETURNING *",
-            [title, description, videoUrl, thumbnailUrl]
+            "INSERT INTO videos (title, video_url, thumbnail_url) VALUES ($1, $2, $3) RETURNING *",
+            [title, videoUrl, thumbnailUrl]
         );
 
         res.status(201).json({ message: "Video uploaded successfully!", video: result.rows[0] });
