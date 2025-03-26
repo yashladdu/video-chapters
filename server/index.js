@@ -19,7 +19,6 @@ app.get("/api/random", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM videos");
     res.json(result.rows);
-    console.log(result.rows);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -67,7 +66,7 @@ app.post("/api/chapters/add", async (req, res) => {
       res.status(201).json({ message: "Chapters added successfully!", chapters: result.rows });
 
       // ✅ Call thumbnail generation asynchronously
-      axios.post("http://localhost:4000/api/chapters/generate-thumbnails", { video_id, videoUrl })
+      axios.post("https://video-chapters.onrender.com/api/chapters/generate-thumbnails", { video_id, videoUrl })
           .catch(err => console.error("Thumbnail generation failed:", err));
 
   } catch (error) {

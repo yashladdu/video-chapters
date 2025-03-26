@@ -6,7 +6,7 @@ import fs from "fs";
 import path from 'path';
 
 // ✅ Use ffmpeg-static for cross-platform compatibility (works on Render)
-ffmpeg.setFfmpegPath(ffmpegStatic);
+ffmpeg.setFfmpegPath(ffmpegStatic.path);
 
 dotenv.config();
 
