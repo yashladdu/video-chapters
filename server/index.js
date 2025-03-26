@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import {generateUploadSignature, generateThumbnails} from "./utils/cloudinary.js";
 import db from "./db.js"
 import axios from "axios"
+import { exec } from "child_process";
 
 dotenv.config();
 
@@ -14,6 +15,17 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/cloudinary-signature", generateUploadSignature);
+
+
+exec("ffmpeg -version", (err, stdout, stderr) => {
+  if (err) {
+    console.error("❌ FFmpeg not found:", err);
+  } else {
+    console.log("✅ FFmpeg is installed:", stdout);
+  }
+});
+
+
 
 app.get("/api/random", async (req, res) => {
   try {
@@ -93,7 +105,7 @@ app.post("/api/chapters/generate-thumbnails", async (req, res) => {
       // Update chapters with the generated thumbnails
       for (const chapter of chapters) {
           const thumbnailUrl = chapterThumbnails.find(t => t.start_time === chapter.start_time)?.url;
-          console.log(thumbnailUrl);
+        
 
           if (thumbnailUrl) {
               await db.query(
