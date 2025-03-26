@@ -5,8 +5,12 @@ import ffmpegStatic from "ffmpeg-static";
 import fs from "fs";
 import path from 'path';
 
-// ✅ Use ffmpeg-static for cross-platform compatibility (works on Render)
-ffmpeg.setFfmpegPath(ffmpegStatic);
+// Ensure ffmpegStatic is correctly set
+if (ffmpegStatic) {
+  ffmpeg.setFfmpegPath(ffmpegStatic);
+} else {
+  console.error("❌ FFmpeg static binary not found");
+}
 
 dotenv.config();
 
