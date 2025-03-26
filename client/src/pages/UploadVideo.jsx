@@ -104,7 +104,7 @@ const UploadVideo = () => {
           await axios.post("https://video-chapters.onrender.com/api/chapters/add", {
             video_id: videoId,
             videoUrl,
-            chapters: chapters.filter(ch => ch.start_time !== "" && ch.title !== ""),
+            chapters: chapters.filter(ch => ch.start_time !== null && ch.start_time !== undefined && ch.title.trim() !== ""),
           });
         } else {
           // Call backend to generate chapters automatically
